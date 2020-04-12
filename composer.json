@@ -1,0 +1,20 @@
+{
+    "name": "arjev/ardigital-mikrotik",
+    "description": "Mikrotik Router Board Api By Ardigital.ge",
+    "authors": [
+        {
+            "name": "Temo Arjevanidze",
+            "email": "arjevanidzetemo@gmail.com"
+        }
+    ],
+    "type": "package",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ArDigital\\Mikrotik\\": "src/"
+        }
+    },
+    "require": {
+        "pear2/net_routeros": "^1.0"
+    }
+}
