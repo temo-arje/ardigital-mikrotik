@@ -4,7 +4,7 @@ namespace ArDigital\Mikrotik;
 
 use PEAR2\Net\RouterOS;
 
-class Processor
+class Mikrotik
 {
 
     protected $connection; // Connection Class
