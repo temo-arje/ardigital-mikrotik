@@ -2,18 +2,22 @@
 
 namespace ArDigital\Mikrotik;
 
+use http\Exception;
 use PEAR2\Net\RouterOS;
+
 
 class Mikrotik
 {
 
-    protected $connection; // Connection Class
+    protected $client; // Connection Class
+    protected $util;
 
     // Constructor Connection Function
     public function __construct()
     {
         try {
-            $this->connection = new RouterOS\Client(config('mikrotik.ip_address'), config('mikrotik.username'), config('mikrotik.password'));
+            $this->client = new RouterOS\Client(config('mikrotik.ip_address'), config('mikrotik.username'), config('mikrotik.password'));
+            $this->util = new RouterOS\Util($this->client);
         } catch (Exception $e) {
             die('Unable to connect to the router.');
         }
@@ -23,7 +27,7 @@ class Mikrotik
     public function Command($command)
     {
         $results = [];
-        $responses = $this->connection->sendSync(new RouterOS\Request($command));
+        $responses = $this->client->sendSync(new RouterOS\Request($command));
         foreach ($responses as $key => $tara) {
             $arr = [];
             foreach ($tara as $keys => $te) {
@@ -61,19 +65,29 @@ class Mikrotik
     // System Reboot Router Board
     public function rebootSystem()
     {
-        $this->connection->sendSync(new RouterOS\Request('/system/reboot'));
+        $this->client->sendSync(new RouterOS\Request('/system/reboot'));
         return ['status' => 'success'];
     }
+
     // DHCP Client List
-    public function dhcpClient(){
+    public function dhcpClient()
+    {
 
         return $this->Command('/ip/dhcp-client/print');
     }
 
     // DHCP Server List
-    public function dhcpServer(){
+    public function dhcpServer()
+    {
         return $this->Command('/ip/dhcp-server/print');
     }
 
+    // Add Configuration
+    public function AddConfig($menu, array $addConfiguration)
+    {
+        $this->util->setMenu((string)$menu);
+        $this->util->add($addConfiguration);
+        return ['status' => 'ok', 'message' => 'Configuration is added'];
+    }
 
 }

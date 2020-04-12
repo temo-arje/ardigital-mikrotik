@@ -62,10 +62,22 @@ public function firewallFilter(){
 
 // With this method you can run an command whose method does not exist in the class
 // Example:
-publif function OtherCommand(){
+public function OtherCommand(){
     $mikrotik = new  Mikrotik();
      return $mikrotik->Command('/system/resource/print');
 }
+
+//Add Configuration Example:
+ public function AddConfig()
+    {
+        $mikrotik = new  Mikrotik();
+        $configuration = $mikrotik->AddConfig('/ip address', [
+            'address' => '192.168.88.12',
+            'interface' => 'ether4',
+            'comment' => 'Example Comment'
+        ]);
+      return $configuration;
+    }
 
 ```
 
