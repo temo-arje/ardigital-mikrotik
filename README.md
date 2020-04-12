@@ -57,6 +57,16 @@ public function firewallFilter(){
  $ip_list = new Mikrotik();
  return $ip_list->firewallFilter(); // return associative array
 }
+// Other methods
+//interfaces, firewallFilter, firewallNat, rebootSystem, dhcpClient, dhcpServer
+
+// With this method you can run an command whose method does not exist in the class
+// Example:
+publif function OtherCommand(){
+    $mikrotik = new  Mikrotik();
+     return $mikrotik->Command('/system/resource/print');
+}
+
 ```
 
 <img src="https://i.ibb.co/bRFnNF4/mikroitk-router-api.png">

@@ -20,7 +20,7 @@ class Mikrotik
     }
 
     // Get Resultant Command
-    public function printCommand($command)
+    public function Command($command)
     {
         $results = [];
         $responses = $this->connection->sendSync(new RouterOS\Request($command));
@@ -37,25 +37,25 @@ class Mikrotik
     // Get Ip Address
     public function getIps()
     {
-        return $this->printCommand('/ip/address/print');
+        return $this->Command('/ip/address/print');
     }
 
     // Get Interfaces
     public function interfaces()
     {
-        return $this->printCommand('/interface/print');
+        return $this->Command('/interface/print');
     }
 
     // Get Firewall Filter Lists
     public function firewallFilter()
     {
-        return $this->printCommand('/ip/firewall/filter/print');
+        return $this->Command('/ip/firewall/filter/print');
     }
 
     //Get Firewall Nat
     public function firewallNat()
     {
-        return $this->printCommand('/ip/firewall/nat/print');
+        return $this->Command('/ip/firewall/nat/print');
     }
 
     // System Reboot Router Board
@@ -67,12 +67,12 @@ class Mikrotik
     // DHCP Client List
     public function dhcpClient(){
 
-        return $this->printCommand('/ip/dhcp-client/print');
+        return $this->Command('/ip/dhcp-client/print');
     }
 
     // DHCP Server List
-    public function dhcServer(){
-        return $this->printCommand('/ip/dhcp-server/print');
+    public function dhcpServer(){
+        return $this->Command('/ip/dhcp-server/print');
     }
 
 
